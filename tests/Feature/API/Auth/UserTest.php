@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\API;
 
+use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -14,7 +13,6 @@ class UserTest extends TestCase
     /** @test */
     public function can_register_a_user()
     {
-
         $response = $this->post('api/register', [
             'name' => 'jane doe',
             'email' => 'user@user.com',
@@ -35,7 +33,6 @@ class UserTest extends TestCase
     /** @test */
     public function user_can_update_profile()
     {
-
         $user = $this->userApiLogin();
 
         $response = $this->put('api/profile', [
@@ -56,11 +53,10 @@ class UserTest extends TestCase
     /** @test */
     public function user_can_login()
     {
-
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create([
-            'email' => 'user@user.com'
+            'email' => 'user@user.com',
         ]);
 
         $this->userApiLogin($user);
@@ -76,7 +72,6 @@ class UserTest extends TestCase
     /** @test */
     public function user_can_logout_and_delete_his_token()
     {
-
         $this->withoutExceptionHandling();
 
         $user = $this->userApiLogin();
@@ -87,10 +82,5 @@ class UserTest extends TestCase
 
         $this->assertCount(0, $user->tokens);
         $response->assertStatus(200);
-
-
     }
-
 }
-
-

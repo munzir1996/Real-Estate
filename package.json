@@ -32,5 +32,5 @@
         "hooks": {
             "pre-commit": "vendor/bin/php-cs-fixer fix && git add ."
         }
-    },
+    }
 }

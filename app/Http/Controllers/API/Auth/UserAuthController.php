@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\API\Auth\UserProfileRequest;
-use App\Http\Requests\API\Auth\UserRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Http\Requests\API\Auth\UserProfileRequest;
+use App\Http\Requests\API\Auth\UserRegisterRequest;
 
 class UserAuthController extends Controller
 {
@@ -26,7 +26,7 @@ class UserAuthController extends Controller
 
         return response()->json([
             'user' => $user->only(['id', 'name', 'email', 'phone',]),
-            'token' => $user->createToken('user-application')->plainTextToken
+            'token' => $user->createToken('user-application')->plainTextToken,
         ], 201);
 
         // return new CustomerResource($customer);
@@ -56,7 +56,7 @@ class UserAuthController extends Controller
 
         $user = User::where("{$field}", $request->identity)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'identity' => ['بيانات الاعتماد المقدمة غير صحيحة.'],
             ]);
@@ -64,9 +64,8 @@ class UserAuthController extends Controller
 
         return response()->json([
             'user' => $user->only(['id', 'name', 'email', 'phone']),
-            'token' => $user->createToken('user-application')->plainTextToken
+            'token' => $user->createToken('user-application')->plainTextToken,
         ], 200);
-
     }
 
     public function logout()
@@ -75,11 +74,4 @@ class UserAuthController extends Controller
 
         return response()->json('User Logged out', 200);
     }
-
 }
-
-
-
-
-
-

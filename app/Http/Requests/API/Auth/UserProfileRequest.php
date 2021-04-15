@@ -27,7 +27,7 @@ class UserProfileRequest extends FormRequest
             'name' => 'required',
             'email' => "required|email|unique:users,email,{$this->id}",
             'phone' => "required|min:10|unique:users,phone,{$this->id}",
-            'password' => 'sometimes|confirmed|min:8'
+            'password' => 'sometimes|confirmed|min:8',
         ];
     }
 
@@ -50,7 +50,4 @@ class UserProfileRequest extends FormRequest
             'password.confirmed' => 'كلمة المرور لا تتطابق مع تأكيد كلمة المرور',
         ];
     }
-
 }
-
-
