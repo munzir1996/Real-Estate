@@ -83,9 +83,11 @@ class UserTest extends TestCase
 
         $user->createToken('user-application');
 
-        $this->post('/api/logout');
+        $response = $this->post('/api/logout');
 
         $this->assertCount(0, $user->tokens);
+        $response->assertStatus(200);
+
 
     }
 

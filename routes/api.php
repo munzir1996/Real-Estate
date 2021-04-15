@@ -27,8 +27,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('login', [UserAuthController::class, 'login'])->name('api.login');
     Route::post('logout', [UserAuthController::class, 'logout'])->name('api.logout');
 
-    Route::get('users', function () {
-        dd(1);
-    });
-
 });

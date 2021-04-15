@@ -63,7 +63,7 @@ class UserAuthController extends Controller
         }
 
         return response()->json([
-            'user' => $user->only(['id', 'name', 'email', 'phone', 'address']),
+            'user' => $user->only(['id', 'name', 'email', 'phone']),
             'token' => $user->createToken('user-application')->plainTextToken
         ], 200);
 
@@ -73,7 +73,7 @@ class UserAuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return response()->json('User Logged out');
+        return response()->json('User Logged out', 200);
     }
 
 }
