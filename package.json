@@ -30,7 +30,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "vendor/bin/php-cs-fixer fix && git add ."
+            "pre-commit": "./bin/pre-commit.sh"
         }
     }
 }
