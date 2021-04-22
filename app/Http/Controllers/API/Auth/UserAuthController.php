@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\API\Auth\UserProfileRequest;
 use App\Http\Requests\API\Auth\UserRegisterRequest;
+use Illuminate\Http\Response;
 
 class UserAuthController extends Controller
 {
@@ -27,7 +28,7 @@ class UserAuthController extends Controller
         return response()->json([
             'user' => $user->only(['id', 'name', 'email', 'phone',]),
             'token' => $user->createToken('user-application')->plainTextToken,
-        ], 201);
+        ], Response::HTTP_CREATED);
 
         // return new CustomerResource($customer);
     }
@@ -42,7 +43,7 @@ class UserAuthController extends Controller
 
         auth()->user()->update($data);
 
-        return response()->json(auth()->user()->only(['id', 'name', 'email', 'phone',]), 200);
+        return response()->json(auth()->user()->only(['id', 'name', 'email', 'phone',]), Response::HTTP_OK);
     }
 
     public function login(Request $request)
@@ -65,13 +66,13 @@ class UserAuthController extends Controller
         return response()->json([
             'user' => $user->only(['id', 'name', 'email', 'phone']),
             'token' => $user->createToken('user-application')->plainTextToken,
-        ], 200);
+        ], Response::HTTP_OK);
     }
 
     public function logout()
     {
         auth()->user()->tokens()->delete();
 
-        return response()->json('User Logged out', 200);
+        return response()->json('User Logged out', Response::HTTP_OK);
     }
 }

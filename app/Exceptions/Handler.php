@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Throwable;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -38,4 +40,5 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
 }

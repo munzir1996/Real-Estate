@@ -5,6 +5,8 @@ namespace Tests\Feature\API;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class UserTest extends TestCase
 {
@@ -20,6 +22,8 @@ class UserTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
+
+        $response->assertCreated();
 
         $this->assertDatabaseHas('users', [
             'name' => 'jane doe',
@@ -40,6 +44,8 @@ class UserTest extends TestCase
             'email' => 'user@user.com',
             'phone' => '0114949905',
         ]);
+
+        $response->assertOk();
 
         $this->assertDatabaseHas('users', [
             'name' => 'jane doe',
@@ -66,7 +72,7 @@ class UserTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -80,7 +86,7 @@ class UserTest extends TestCase
 
         $response = $this->post('/api/logout');
 
-        $this->assertCount(0, $user->tokens);
         $response->assertStatus(200);
+        $this->assertCount(0, $user->tokens);
     }
 }

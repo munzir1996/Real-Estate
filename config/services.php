@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID', '748934001875-b53to552s6dfn5ciit20jk131mpba6av.apps.googleusercontent.com'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', 'vMxUIUwKmym8JoYopwhVpmGa'),
+        'redirect' => 'https://aqar.clouds-valley.com/auth/google/callback',
+    ],
+
 ];
