@@ -57,7 +57,7 @@ class UserAuthController extends Controller
 
         $user = User::where("{$field}", $request->identity)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'identity' => ['بيانات الاعتماد المقدمة غير صحيحة.'],
             ]);
@@ -75,4 +75,5 @@ class UserAuthController extends Controller
 
         return response()->json('User Logged out', Response::HTTP_OK);
     }
+
 }
