@@ -23,4 +23,14 @@ class City extends Model
         return $this->belongsTo(Region::class);
     }
 
+    /**
+     * Get all of the locations for the City
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
 }
