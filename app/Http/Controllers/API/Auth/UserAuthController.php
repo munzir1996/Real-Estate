@@ -17,7 +17,7 @@ class UserAuthController extends Controller
     public function register(UserRegisterRequest $request)
     {
         $data = $request->validated();
-
+        
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
