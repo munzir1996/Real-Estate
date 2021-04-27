@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Region extends Model
+class City extends Model
 {
-
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    protected $with = ['region'];
 
     /**
-     * Get all of the cities for the Region
+     * Get the region that owns the City
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cities()
+    public function region()
     {
-        return $this->hasMany(City::class);
+        return $this->belongsTo(Region::class);
     }
 
 }
